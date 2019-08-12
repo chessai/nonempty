@@ -1,0 +1,51 @@
+cabal-version: 2.4
+name:
+  non-empty-applicative
+version:
+  0.1
+synopsis:
+  non-empty applicative structure
+description:
+  non-empty applicative structure
+homepage:
+  https://github.com/chessai/non-empty-applicative
+bug-reports:
+  https://github.com/chessai/non-empty-applicative/issues
+license:
+  BSD-3-Clause
+license-file:
+  LICENSE
+author:
+  chessai
+maintainer:
+  chessai <chessai1996@gmail.com>
+copyright:
+  © 2019 chessai
+category:
+  Data
+build-type:
+  Simple
+extra-doc-files:
+    README.md
+  , CHANGELOG.md
+tested-with:
+  GHC == 8.6.3
+
+library
+  hs-source-dirs:
+    src
+  exposed-modules:
+    NonEmptyApplicative
+  build-depends:
+    , base ^>= 4.12.0.0
+  ghc-options:
+    -Wall
+    -O2
+  default-language:
+    Haskell2010
+
+source-repository head
+  type:
+    git
+  location:
+    https://github.com/chessai/non-empty-applicative.git
