@@ -7,6 +7,10 @@
       , DerivingStrategies
   #-}
 
+{-| This module provides a way to lift potentially empty structures
+    into one which is guaranteed to be NonEmpty by construction.
+-}
+
 module NonEmpty
   ( NonEmpty(..)
 
@@ -16,6 +20,7 @@ module NonEmpty
   , zip
   , zipWith
   , unzip
+  , nonEmpty
   ) where
 
 import Control.Comonad
@@ -29,6 +34,16 @@ import Prelude hiding (head, tail,zip,zipWith,unzip)
 import qualified Data.Foldable as F
 import qualified Data.List.NonEmpty as NE
 
+-- | A structure which is nonempty by construction.
+--
+--   Typically this will be used to construct list-like structures; e.g.
+--
+--   * @NonEmpty [] a@ is a lazy list containing at least one element.
+--
+--   * @NonEmpty (NonEmpty []) a@ is a lazy list containing at least two
+--   elements.
+--
+--   * @NonEmpty Maybe a@ is a list that contains one or two elements.
 data NonEmpty f a = NonEmpty a (f a)
   deriving stock (Functor, Foldable, Traversable)
   deriving stock (Generic, Generic1)
@@ -112,6 +127,11 @@ unzip :: (Functor f)
   -> (NonEmpty f a, NonEmpty f b)
 unzip = NE.unzip
 {-# inline unzip #-}
+
+-- | Construct a 'NonEmpty'.
+nonEmpty :: a -> f a -> NonEmpty f a
+nonEmpty = NonEmpty
+{-# inline nonEmpty #-}
 
 -- Internal --
 toNonEmpty' :: (Foldable t) => a -> t a -> NE.NonEmpty a
