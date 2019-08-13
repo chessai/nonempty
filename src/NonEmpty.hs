@@ -77,6 +77,8 @@ instance ComonadHoist NonEmpty where
 --instance (Monoid m, ComonadTraced m w) => ComonadTraced m (NonEmpty w) where
 
 -- Is this lawful? What are the laws of ComonadTrans?
+-- Is it just dual to MonadTrans, i.e. 'lower' must be
+-- a Comonad homomorphism?
 --instance ComonadTrans NonEmpty where
 --  lower = tail
 
